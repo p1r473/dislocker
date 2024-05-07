@@ -3,7 +3,7 @@
 /*
  * Dislocker -- enables to read/write on BitLocker encrypted partitions under
  * Linux
- * Copyright (C) 2012-2013  Romain Coltel, Hervé Schauer Consultants
+ * Copyright (C) 2012-2013  Romain Coltel, HervÃ© Schauer Consultants
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,13 +56,13 @@ static void hide_opt(char* opt)
 static void setclearkey(dis_context_t dis_ctx, char* optarg)
 {
 	(void) optarg;
-	int trueval = TRUE;
-	dis_setopt(dis_ctx, DIS_OPT_USE_CLEAR_KEY, &trueval);
+	int is_true = TRUE;
+	dis_setopt(dis_ctx, DIS_OPT_USE_CLEAR_KEY, &is_true);
 }
 static void setbekfile(dis_context_t dis_ctx, char* optarg)
 {
-	int trueval = TRUE;
-	dis_setopt(dis_ctx, DIS_OPT_USE_BEK_FILE, &trueval);
+	int is_true = TRUE;
+	dis_setopt(dis_ctx, DIS_OPT_USE_BEK_FILE, &is_true);
 	dis_setopt(dis_ctx, DIS_OPT_SET_BEK_FILE_PATH, optarg);
 }
 static void setforceblock(dis_context_t dis_ctx, char* optarg)
@@ -76,14 +76,14 @@ static void setforceblock(dis_context_t dis_ctx, char* optarg)
 }
 static void setfvek(dis_context_t dis_ctx, char* optarg)
 {
-	int trueval = TRUE;
-	dis_setopt(dis_ctx, DIS_OPT_USE_FVEK_FILE, &trueval);
+	int is_true = TRUE;
+	dis_setopt(dis_ctx, DIS_OPT_USE_FVEK_FILE, &is_true);
 	dis_setopt(dis_ctx, DIS_OPT_SET_FVEK_FILE_PATH, optarg);
 }
 static void setvmk(dis_context_t dis_ctx, char* optarg)
 {
-	int trueval = TRUE;
-	dis_setopt(dis_ctx, DIS_OPT_USE_VMK_FILE, &trueval);
+	int is_true = TRUE;
+	dis_setopt(dis_ctx, DIS_OPT_USE_VMK_FILE, &is_true);
 	dis_setopt(dis_ctx, DIS_OPT_SET_VMK_FILE_PATH, optarg);
 }
 static void setlogfile(dis_context_t dis_ctx, char* optarg)
@@ -97,8 +97,8 @@ static void setoffset(dis_context_t dis_ctx, char* optarg)
 }
 static void setrecoverypwd(dis_context_t dis_ctx, char* optarg)
 {
-	int trueval = TRUE;
-	dis_setopt(dis_ctx, DIS_OPT_USE_RECOVERY_PASSWORD, &trueval);
+	int is_true = TRUE;
+	dis_setopt(dis_ctx, DIS_OPT_USE_RECOVERY_PASSWORD, &is_true);
 	dis_setopt(dis_ctx, DIS_OPT_SET_RECOVERY_PASSWORD, optarg);
 	hide_opt(optarg);
 }
@@ -111,19 +111,19 @@ static void setquiet(dis_context_t dis_ctx, char* optarg)
 static void setro(dis_context_t dis_ctx, char* optarg)
 {
 	(void) optarg;
-	int trueval = TRUE;
-	dis_setopt(dis_ctx, DIS_OPT_READ_ONLY, &trueval);
+	int is_true = TRUE;
+	dis_setopt(dis_ctx, DIS_OPT_READ_ONLY, &is_true);
 }
 static void setstateok(dis_context_t dis_ctx, char* optarg)
 {
 	(void) optarg;
-	int trueval = TRUE;
-	dis_setopt(dis_ctx, DIS_OPT_DONT_CHECK_VOLUME_STATE, &trueval);
+	int is_true = TRUE;
+	dis_setopt(dis_ctx, DIS_OPT_DONT_CHECK_VOLUME_STATE, &is_true);
 }
 static void setuserpassword(dis_context_t dis_ctx, char* optarg)
 {
-	int trueval = TRUE;
-	dis_setopt(dis_ctx, DIS_OPT_USE_USER_PASSWORD, &trueval);
+	int is_true = TRUE;
+	dis_setopt(dis_ctx, DIS_OPT_USE_USER_PASSWORD, &is_true);
 	dis_setopt(dis_ctx, DIS_OPT_SET_USER_PASSWORD, optarg);
 	hide_opt(optarg);
 }
@@ -266,7 +266,7 @@ int dis_getopts(dis_context_t dis_ctx, int argc, char** argv)
 		return -1;
 
 	dis_config_t* cfg = &dis_ctx->cfg;
-	int trueval = TRUE;
+	int is_true = TRUE;
 
 
 	long_opts = malloc(nb_options * sizeof(struct option));
@@ -285,12 +285,12 @@ int dis_getopts(dis_context_t dis_ctx, int argc, char** argv)
 		{
 			case 'c':
 			{
-				dis_setopt(dis_ctx, DIS_OPT_USE_CLEAR_KEY, &trueval);
+				dis_setopt(dis_ctx, DIS_OPT_USE_CLEAR_KEY, &is_true);
 				break;
 			}
 			case 'f':
 			{
-				dis_setopt(dis_ctx, DIS_OPT_USE_BEK_FILE, &trueval);
+				dis_setopt(dis_ctx, DIS_OPT_USE_BEK_FILE, &is_true);
 				dis_setopt(dis_ctx, DIS_OPT_SET_BEK_FILE_PATH, optarg);
 				break;
 			}
@@ -312,13 +312,13 @@ int dis_getopts(dis_context_t dis_ctx, int argc, char** argv)
 			}
 			case 'k':
 			{
-				dis_setopt(dis_ctx, DIS_OPT_USE_FVEK_FILE, &trueval);
+				dis_setopt(dis_ctx, DIS_OPT_USE_FVEK_FILE, &is_true);
 				dis_setopt(dis_ctx, DIS_OPT_SET_FVEK_FILE_PATH, optarg);
 				break;
 			}
 			case 'K':
 			{
-				dis_setopt(dis_ctx, DIS_OPT_USE_VMK_FILE, &trueval);
+				dis_setopt(dis_ctx, DIS_OPT_USE_VMK_FILE, &is_true);
 				dis_setopt(dis_ctx, DIS_OPT_SET_VMK_FILE_PATH, optarg);
 				break;
 			}
@@ -340,7 +340,7 @@ int dis_getopts(dis_context_t dis_ctx, int argc, char** argv)
 			}
 			case 'p':
 			{
-				dis_setopt(dis_ctx, DIS_OPT_USE_RECOVERY_PASSWORD, &trueval);
+				dis_setopt(dis_ctx, DIS_OPT_USE_RECOVERY_PASSWORD, &is_true);
 				dis_setopt(dis_ctx, DIS_OPT_SET_RECOVERY_PASSWORD, optarg);
 				hide_opt(optarg);
 				break;
@@ -353,17 +353,17 @@ int dis_getopts(dis_context_t dis_ctx, int argc, char** argv)
 			}
 			case 'r':
 			{
-				dis_setopt(dis_ctx, DIS_OPT_READ_ONLY, &trueval);
+				dis_setopt(dis_ctx, DIS_OPT_READ_ONLY, &is_true);
 				break;
 			}
 			case 's':
 			{
-				dis_setopt(dis_ctx, DIS_OPT_DONT_CHECK_VOLUME_STATE, &trueval);
+				dis_setopt(dis_ctx, DIS_OPT_DONT_CHECK_VOLUME_STATE, &is_true);
 				break;
 			}
 			case 'u':
 			{
-				dis_setopt(dis_ctx, DIS_OPT_USE_USER_PASSWORD, &trueval);
+				dis_setopt(dis_ctx, DIS_OPT_USE_USER_PASSWORD, &is_true);
 				dis_setopt(dis_ctx, DIS_OPT_SET_USER_PASSWORD, optarg);
 				hide_opt(optarg);
 				break;
@@ -795,7 +795,7 @@ void dis_print_args(dis_context_t dis_ctx)
 	if(cfg->force_block)
 		dis_printf(
 			L_DEBUG,
-			"   Forced to be using metadata block n°%d\n",
+			"   Forced to be using metadata block nÂ°%d\n",
 			cfg->force_block
 		);
 	else
@@ -828,3 +828,4 @@ int dis_is_volume_state_checked(dis_context_t dis_ctx)
 		return -1;
 	return !(dis_ctx->cfg.flags & DIS_FLAG_DONT_CHECK_VOLUME_STATE);
 }
+
